@@ -4,92 +4,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO AYARLARI (Google'da Çıkmanı Sağlayan Kısım) -->
-    <title>Turk-AI | Kaan1881 Dünya Kupası 2026 Simülatörü</title>
-    <meta name="description" content="Turk-AI tarafından geliştirilen, Kaan1881 imzalı Dünya Kupası 2026 simülatörü ve yapay zeka projesi. Ücretsiz futbol simülasyonu.">
-    <meta name="keywords" content="Turk-AI, Kaan1881, Dünya Kupası 2026, Futbol Simülatörü, Yapay Zeka, AI Football, 48 Takım Dünya Kupası">
+    <!-- GOOGLE ARAMA AYARLARI (SEO) -->
+    <title>Turk-AI | Kaan1881 Yapay Zeka Projesi</title>
+    <meta name="description" content="Turk-AI, Kaan1881 tarafından geliştirilen yerli yapay zeka teknolojileri ve dijital çözümler merkezidir.">
+    <meta name="keywords" content="Turk-AI, Kaan1881, Yapay Zeka, AI, Yerli Yapay Zeka, Machine Learning, Kaan1881 AI">
     <meta name="author" content="Kaan1881">
 
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #0b0e14;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+        * {
             margin: 0;
-            text-align: center;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #05070a;
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Arka plan yapay zeka efektli ışıklar */
+        .bg-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(0, 162, 255, 0.2);
+            filter: blur(100px);
+            border-radius: 50%;
+            z-index: -1;
         }
 
         .container {
-            padding: 20px;
-            border: 2px solid #00d4ff;
-            border-radius: 20px;
-            background: rgba(0, 212, 255, 0.05);
-            box-shadow: 0 0 50px rgba(0, 212, 255, 0.2);
+            text-align: center;
+            padding: 40px;
+            max-width: 600px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(10, 15, 25, 0.8);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
 
         h1 {
             font-size: 3.5rem;
-            margin: 0;
-            background: linear-gradient(to right, #00d4ff, #00ff88);
+            letter-spacing: -2px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffffff 0%, #00a2ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         p {
-            font-size: 1.2rem;
-            color: #a0a0a0;
-            margin: 20px 0;
+            font-size: 1.1rem;
+            color: #8892b0;
+            line-height: 1.6;
+            margin-bottom: 30px;
         }
 
         .btn {
             display: inline-block;
-            background: linear-gradient(45deg, #00d4ff, #008fb3);
+            padding: 15px 40px;
+            background: #00a2ff;
             color: white;
-            padding: 18px 40px;
             text-decoration: none;
             border-radius: 12px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: 0.4s;
-            border: none;
-            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 162, 255, 0.3);
         }
 
         .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 162, 255, 0.5);
+            background: #0088d6;
         }
 
-        .footer-text {
-            margin-top: 30px;
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            border-radius: 20px;
             font-size: 0.8rem;
-            color: #555;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 0.75rem;
+            color: #444;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>TURK-AI</h1>
-        <p>Kaan1881 Sunar: Dünya Kupası 2026 Simülasyon Deneyimi</p>
+    <div class="bg-glow"></div>
 
-        <!-- Google Play Linkin Buraya Gelecek -->
-        <a href="https://play.google.com/store/apps/details?id=COM.KAAN1881.TURKAI" class="btn">
-            GOOGLE PLAY'DE KEŞFET
+    <div class="container">
+        <div class="status-badge">● Sistem Çevrimiçi</div>
+        <h1>TURK-AI</h1>
+        <p>Kaan1881 tarafından geliştirilen, yeni nesil yapay zeka teknolojileri ve dijital zeka modelleri.</p>
+
+        <!-- Google Play linkin varsa buraya eklersin, yoksa butonu silebilirsin -->
+        <a href="https://play.google.com/store/apps/details?id=com.kaan1881.turkai" class="btn">
+            GOOGLE PLAY'DE İNCELE
         </a>
 
-        <div style="margin-top: 20px; color: #00ff88; font-weight: bold;">
-            ● DURUM: GOOGLE DİZİNİNE EKLENDİ
+        <div class="footer">
+            DEVELOPED BY KAAN1881 © 2026
         </div>
-    </div>
-
-    <div class="footer-text">
-        © 2026 Turk-AI & Kaan1881. Tüm Hakları Saklıdır.
     </div>
 
 </body>
