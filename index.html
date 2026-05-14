@@ -3,125 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turk-AI | Kaan1881 Yapay Zeka Sohbet</title>
     
-    <!-- GOOGLE ARAMA AYARLARI (SEO) -->
-    <title>Turk-AI | Kaan1881 Yapay Zeka Projesi</title>
-    <meta name="description" content="Turk-AI, Kaan1881 tarafından geliştirilen yerli yapay zeka teknolojileri ve dijital çözümler merkezidir.">
-    <meta name="keywords" content="Turk-AI, Kaan1881, Yapay Zeka, AI, Yerli Yapay Zeka, Machine Learning, Kaan1881 AI">
-    <meta name="author" content="Kaan1881">
+    <!-- Google SEO -->
+    <meta name="description" content="Turk-AI: Kaan1881 tarafından geliştirilen gerçek zamanlı yapay zeka sohbet asistanı.">
+    <meta name="keywords" content="Turk-AI, Kaan1881, Yapay Zeka Sohbet, AI Chat, Kaan1881 AI">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0b0e14; color: white; height: 100vh; display: flex; flex-direction: column; }
+        
+        /* Header */
+        header { padding: 20px; text-align: center; background: #151921; border-bottom: 1px solid #00d4ff; box-shadow: 0 4px 15px rgba(0, 179, 255, 0.2); }
+        h1 { font-size: 1.5rem; color: #00d4ff; letter-spacing: 2px; }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #05070a;
-            color: #ffffff;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
+        /* Sohbet Alanı */
+        #chat-window { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px; }
+        .message { max-width: 80%; padding: 12px 18px; border-radius: 15px; line-height: 1.4; font-size: 1rem; }
+        .ai { align-self: flex-start; background: #1f2530; color: #e0e0e0; border-bottom-left-radius: 2px; }
+        .user { align-self: flex-end; background: #00d4ff; color: #000; font-weight: 500; border-bottom-right-radius: 2px; }
 
-        /* Arka plan yapay zeka efektli ışıklar */
-        .bg-glow {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: rgba(0, 162, 255, 0.2);
-            filter: blur(100px);
-            border-radius: 50%;
-            z-index: -1;
-        }
+        /* Giriş Alanı */
+        .input-area { padding: 20px; background: #151921; display: flex; gap: 10px; }
+        input { flex: 1; padding: 15px; border-radius: 10px; border: 1px solid #333; background: #0b0e14; color: white; outline: none; }
+        input:focus { border-color: #00d4ff; }
+        button { padding: 0 25px; background: #00d4ff; border: none; border-radius: 10px; color: black; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #008fb3; }
 
-        .container {
-            text-align: center;
-            padding: 40px;
-            max-width: 600px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(10, 15, 25, 0.8);
-            border-radius: 30px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            letter-spacing: -2px;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #ffffff 0%, #00a2ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        p {
-            font-size: 1.1rem;
-            color: #8892b0;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 15px 40px;
-            background: #00a2ff;
-            color: white;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 162, 255, 0.3);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 162, 255, 0.5);
-            background: #0088d6;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            background: rgba(0, 255, 136, 0.1);
-            color: #00ff88;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-bottom: 20px;
-            border: 1px solid rgba(0, 255, 136, 0.3);
-        }
-
-        .footer {
-            margin-top: 25px;
-            font-size: 0.75rem;
-            color: #444;
-            letter-spacing: 1px;
-        }
+        /* Yükleniyor Efekti */
+        .typing { font-style: italic; color: #555; font-size: 0.8rem; margin-left: 10px; display: none; }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
+<header>
+    <h1>TURK-AI</h1>
+    <div style="font-size: 0.7rem; color: #555;">DEVELOPED BY KAAN1881</div>
+</header>
 
-    <div class="container">
-        <div class="status-badge">● Sistem Çevrimiçi</div>
-        <h1>TURK-AI</h1>
-        <p>Kaan1881 tarafından geliştirilen, yeni nesil yapay zeka teknolojileri ve dijital zeka modelleri.</p>
+<div id="chat-window">
+    <div class="message ai">Merhaba! Ben Turk-AI. Kaan1881 tarafından geliştirildim. Sana nasıl yardımcı olabilirim?</div>
+</div>
 
-        <!-- Google Play linkin varsa buraya eklersin, yoksa butonu silebilirsin -->
-        <a href="https://play.google.com/store/apps/details?id=com.kaan1881.turkai" class="btn">
-            GOOGLE PLAY'DE İNCELE
-        </a>
+<div class="typing" id="typing">Turk-AI yazıyor...</div>
 
-        <div class="footer">
-            DEVELOPED BY KAAN1881 © 2026
-        </div>
-    </div>
+<div class="input-area">
+    <input type="text" id="user-input" placeholder="Mesajınızı yazın..." onkeypress="handleKeyPress(event)">
+    <button onclick="sendMessage()">GÖNDER</button>
+</div>
+
+<script>
+    const chatWindow = document.getElementById('chat-window');
+    const userInput = document.getElementById('user-input');
+    const typingIndicator = document.getElementById('typing');
+
+    function handleKeyPress(e) {
+        if (e.key === 'Enter') sendMessage();
+    }
+
+    function sendMessage() {
+        const text = userInput.value.trim();
+        if (text === "") return;
+
+        // Kullanıcı mesajını ekle
+        addMessage(text, 'user');
+        userInput.value = "";
+
+        // AI Yanıtı simülasyonu
+        typingIndicator.style.display = "block";
+        
+        setTimeout(() => {
+            typingIndicator.style.display = "none";
+            const response = generateAIResponse(text);
+            addMessage(response, 'ai');
+        }, 1000);
+    }
+
+    function addMessage(text, sender) {
+        const div = document.createElement('div');
+        div.className = `message ${sender}`;
+        div.innerText = text;
+        chatWindow.appendChild(div);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    function generateAIResponse(input) {
+        const msg = input.toLowerCase();
+        
+        if (msg.includes("merhaba") || msg.includes("selam")) return "Selam! Ben Turk-AI, seninle sohbet etmek için buradayım.";
+        if (msg.includes("kimsin") || msg.includes("adın ne")) return "Ben Turk-AI. Kaan1881 tarafından yaratılmış bir yapay zekayım.";
+        if (msg.includes("nasılsın")) return "Harikayım! Yazılım dünyasında geziniyorum. Sen nasılsın?";
+        if (msg.includes("kaan")) return "Kaan1881 benim geliştiricimdir. O harika bir yazılımcı!";
+        if (msg.includes("futbol") || msg.includes("maç")) return "Futbolu severim! İstersen seninle 2026 Dünya Kupası hakkında konuşabiliriz.";
+        
+        return "Bunu söylediğin için teşekkürler! Seni dinliyorum, devam et...";
+    }
+</script>
 
 </body>
 </html>
