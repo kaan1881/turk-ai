@@ -55,20 +55,28 @@
 
     input.addEventListener("keypress", (e) => { if (e.key === "Enter") send(); });
 
-    function send() {
+    async function send() {
         const val = input.value.trim();
         if (!val) return;
 
         addMsg(val, 'user');
         input.value = "";
-        
         typing.style.display = "block";
         
-        setTimeout(() => {
+        try {
+            // Python sunucuna (localhost:5000) bağlanıyor
+            const res = await fetch('http://127.0.0.1:5000/ask', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({message: val})
+            });
+            const data = await res.json();
             typing.style.display = "none";
-            const reply = getReply(val);
-            addMsg(reply, 'ai');
-        }, 800);
+            addMsg(data.response, 'ai');
+        } catch (e) {
+            typing.style.display = "none";
+            addMsg("Sunucuya bağlanılamadı! Python kodunu çalıştırdığından emin ol.", 'ai');
+        }
     }
 
     function addMsg(text, sender) {
@@ -77,16 +85,6 @@
         d.innerText = text;
         chat.appendChild(d);
         chat.scrollTop = chat.scrollHeight;
-    }
-
-    function getReply(txt) {
-        const t = txt.toLowerCase();
-        if (t.includes("selam") || t.includes("merhaba")) return "Selam! Seninle konuşmak harika.";
-        if (t.includes("kimsin")) return "Ben Turk-AI, Kaan1881'in yapay zeka projesiyim.";
-        if (t.includes("nasılsın")) return "Sistemlerim %100 kapasiteyle çalışıyor, harikayım! Sen nasılsın?";
-        if (t.includes("kaan")) return "Kaan1881 benim mimarım. Onu çok severim!";
-        if (t.includes("yapay zeka")) return "Yapay zeka gelecektir ve ben o geleceğin bir parçasıyım.";
-        return "Bunu anladım! Çok ilginç, peki başka nelerden bahsetmek istersin?";
     }
 </script>
 
