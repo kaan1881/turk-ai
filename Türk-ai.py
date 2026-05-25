@@ -11,7 +11,7 @@ app = Flask(__name__)
 def konus(metin):
     def seslendir():
         try:
-            # Flask ile çakışmaması için her seferinde yeni init
+            # Sadece yerel bilgisayarda çalışması için kontrol (hata önleme)
             engine = pyttsx3.init()
             engine.setProperty('rate', 175)
             engine.say(metin)
@@ -111,12 +111,11 @@ WEB_ARAYUZU = """
 </html>
 """
 
-# --- ZEKA MOTORU (HATA ÖNLEYİCİ) ---
+# --- ZEKA MOTORU ---
 def get_ai_response(soru):
     sistem_mesaji = "Sen Turk AI'sın. Kaan tarafından geliştirildin. Samimi ve zeki cevaplar ver."
-    temiz_soru = urllib.parse.quote(sistem_mesaji + soru)
+    temiz_soru = urllib.parse.quote(sistem_mesaji + " " + soru)
     
-    # Denenecek 3 farklı model linki
     modeller = [
         f"https://text.pollinations.ai/{temiz_soru}?model=openai",
         f"https://text.pollinations.ai/{temiz_soru}?model=mistral",
@@ -126,11 +125,12 @@ def get_ai_response(soru):
     for url in modeller:
         try:
             r = requests.get(url, timeout=15)
-            if r.status_code == 200 and r.text:
+            # Yanıt boş değilse ve hata içermiyorsa döndür
+            if r.status_code == 200 and r.text and len(r.text) > 5:
                 return r.text
         except:
             continue
-    return "Şu an tüm zeka motorlarım yoğun Kaan. İnternetini kontrol edip tekrar dener misin?"
+    return "Şu an zeka motorlarım yoğun Kaan. İnternetini kontrol edip tekrar dener misin?"
 
 # --- FLASK YOLLARI ---
 @app.route('/')
@@ -140,19 +140,10 @@ def home():
 @app.route('/ask', methods=['POST'])
 def ask():
     data = request.get_json()
-    user_msg = data.get("message", "")
-    
-    # Yapay zekadan cevap al
-    bot_reply = get_ai_response(user_msg)
-    
-    # Seslendir
+    if not data or "message" not in data: return jsonify({"response": "Hata!"})
+    bot_reply = get_ai_response(data["message"])
     konus(bot_reply)
-    
     return jsonify({"response": bot_reply})
 
 if __name__ == '__main__':
-    print("\n" + "="*50)
-    print("TURK AI YÜKLENDİ!")
-    print("Giriş adresi: http://127.0.0.1:5000")
-    print("="*50 + "\n")
     app.run(port=5000, threaded=True)
