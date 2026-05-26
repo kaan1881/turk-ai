@@ -1,5 +1,4 @@
 flask
 requests
 gunicorn
-pyttsx3
-espeak
+
